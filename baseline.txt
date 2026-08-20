@@ -1,0 +1,8 @@
+Model: distilgpt2
+Parameters: 81,912,576
+Device: CPU
+
+Runs: 5
+Average time: 0.79 seconds
+Generated tokens: 30
+Tokens/second: 37.83
