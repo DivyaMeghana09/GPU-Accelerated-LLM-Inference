@@ -1,0 +1,5 @@
+Model: distilgpt2
+Device: CPU
+Generated tokens: 30
+Time: 0.94 seconds
+Tokens/second: 32.00
