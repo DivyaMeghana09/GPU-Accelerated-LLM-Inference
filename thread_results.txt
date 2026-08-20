@@ -1,0 +1,11 @@
+Model: distilgpt2
+Device: CPU
+
+Thread Benchmark
+
+1 thread  = 37.33 tokens/sec
+2 threads = 42.88 tokens/sec
+4 threads = 34.75 tokens/sec
+8 threads = 35.06 tokens/sec
+
+Best setting: 2 threads
