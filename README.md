@@ -120,10 +120,10 @@ gpu-llm-inference/
 ### Next Steps
 
 - Optimize NVIDIA GPU inference
-- Learn CUDA kernels
 - Test FP16/BF16
-- Test quantization
 - Measure GPU memory usage
+- Learn and apply CUDA optimization
+- Test quantization
 - Compare optimization techniques
 - Build a final performance report
 
