@@ -1,0 +1,19 @@
+Model: distilgpt2
+GPU: NVIDIA Tesla T4
+Generated tokens: 30
+
+Run 1: 0.1539 seconds
+Run 2: 0.1548 seconds
+Run 3: 0.1557 seconds
+Run 4: 0.1645 seconds
+Run 5: 0.1638 seconds
+
+Average time: 0.1585 seconds
+Tokens/second: 189.22
+
+Best CPU result:
+2 threads
+42.88 tokens/second
+
+GPU speedup:
+~4.4x
