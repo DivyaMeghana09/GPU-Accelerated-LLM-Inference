@@ -1,4 +1,4 @@
-### GPU-Accelerated LLM Inference
+# GPU-Accelerated LLM Inference
 
 ### Project Goal
 
@@ -50,6 +50,41 @@ Tokens/second: 37.83
 |       4 |         34.75 |
 |       8 |         35.06 |
 
+## NVIDIA GPU Benchmark
+
+The same DistilGPT2 model was tested on an NVIDIA Tesla T4 GPU using CUDA.
+
+## Results
+
+| Configuration | Tokens/second |
+|---|---:|
+| CPU baseline | 37.83 |
+| CPU — 2 threads | 42.88 |
+| NVIDIA Tesla T4 | **189.22** |
+
+**Best measured GPU throughput: 189.22 tokens/sec**
+
+**GPU speedup vs best CPU: ~4.4×**
+
+In this experiment, the Tesla T4 achieved approximately 4.4× higher throughput than the best CPU configuration tested.
+
+### GPU Benchmark Details
+
+```text
+GPU: NVIDIA Tesla T4
+Generated tokens: 30
+Average time: 0.1585 seconds
+Tokens/second: 189.22
+```
+
+### Current Results
+```bash
+CPU baseline:       37.83 tokens/sec
+Best CPU test:      42.88 tokens/sec
+NVIDIA T4:         189.22 tokens/sec
+```
+This demonstrates the performance advantage of GPU acceleration for this LLM inference workload.
+
 ### Finding
 
 **2 CPU threads gave the best result in this experiment: 42.88 tokens/second.**
@@ -58,14 +93,14 @@ This showed me that more CPU threads do not always mean faster LLM inference. Pe
 
 ### Project Structure
 
-```bash
-
+```text
 gpu-llm-inference/
 │
 ├── benchmarks/
 │   ├── baseline.txt
 │   ├── first_profile.txt
-│   └── thread_results.txt
+│   ├── thread_results.txt
+│   └── gpu_t4_results.txt
 │
 ├── baseline.py
 ├── llm_profile.py
@@ -83,13 +118,14 @@ gpu-llm-inference/
 . Why optimization should be based on measurements
 
 ### Next Steps
-. Test on an NVIDIA GPU
-. Learn CUDA
-. Compare CPU vs GPU inference
-. Test FP16/BF16
-. Test quantization
-. Improve GPU memory usage
-. Benchmark the optimized system
+
+- Optimize NVIDIA GPU inference
+- Learn CUDA kernels
+- Test FP16/BF16
+- Test quantization
+- Measure GPU memory usage
+- Compare optimization techniques
+- Build a final performance report
 
 ### Project Philosophy
 
