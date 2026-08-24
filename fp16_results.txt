@@ -1,0 +1,19 @@
+Model: distilgpt2
+GPU: NVIDIA Tesla T4
+
+Precision Comparison:
+
+FP32:
+Tokens/second: 175.67
+GPU memory: 481.85 MB
+
+FP16:
+Tokens/second: 185.33
+GPU memory: 329.24 MB
+
+FP16 improvement:
+~5.5% higher throughput
+~31.7% lower GPU memory allocation
+
+Result:
+FP16 was faster and used less GPU memory in this experiment.

@@ -54,6 +54,26 @@ Tokens/second: 37.83
 
 The same DistilGPT2 model was tested on an NVIDIA Tesla T4 GPU using CUDA.
 
+## FP16 Optimization
+
+FP16 (16-bit floating point) was tested on the NVIDIA Tesla T4 to see whether lower precision could improve inference performance and reduce GPU memory usage.
+
+### FP32 vs FP16
+
+| Precision | Tokens/second | GPU Memory |
+|---|---:|---:|
+| FP32 | 175.67 | 481.85 MB |
+| **FP16** | **185.33** | **329.24 MB** |
+
+### Result
+
+In this experiment, FP16 achieved:
+
+- **~5.5% higher throughput**
+- **~31.7% lower GPU memory allocation**
+
+This shows that lower-precision computation can improve both performance and memory efficiency for this workload.
+
 ## Results
 
 | Configuration | Tokens/second |
@@ -100,7 +120,8 @@ gpu-llm-inference/
 │   ├── baseline.txt
 │   ├── first_profile.txt
 │   ├── thread_results.txt
-│   └── gpu_t4_results.txt
+│   ├── gpu_t4_results.txt
+│   └── fp16_results.txt
 │
 ├── baseline.py
 ├── llm_profile.py
@@ -109,19 +130,17 @@ gpu-llm-inference/
 ```
 
 ### What I Learned
-- What LLM inference means
-- How to run an LLM locally
-- How to measure inference speed
-- What a performance baseline is
-- How CPU threads affect inference
-- How to benchmark different configurations
-- Why optimization should be based on measurements
+. What LLM inference means
+. How to run an LLM locally
+. How to measure inference speed
+. What a performance baseline is
+. How CPU threads affect inference
+. How to benchmark different configurations
+. Why optimization should be based on measurements
 
 ### Next Steps
 
-- Optimize NVIDIA GPU inference
-- Test FP16/BF16
-- Measure GPU memory usage
+- Measure GPU memory usage across configurations
 - Learn and apply CUDA optimization
 - Test quantization
 - Compare optimization techniques
