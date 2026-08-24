@@ -74,6 +74,20 @@ In this experiment, FP16 achieved:
 
 This shows that lower-precision computation can improve both performance and memory efficiency for this workload.
 
+## Batch Inference
+
+Batching allows the GPU to process multiple prompts together.
+
+| Batch Size | Tokens/second |
+|---:|---:|
+| 1 | 124.23 |
+| 4 | 450.72 |
+| **8** | **944.90** |
+
+In this experiment, batch size 8 achieved approximately **7.6× higher throughput** than batch size 1.
+
+This demonstrates how batching can improve GPU throughput for multiple inference requests.
+
 ## Results
 
 | Configuration | Tokens/second |
@@ -130,16 +144,13 @@ gpu-llm-inference/
 ```
 
 ### What I Learned
-
-- What LLM inference means
-- How to run an LLM locally
-- How to measure inference speed
-- What a performance baseline is
-- How CPU threads affect inference
-- How to benchmark different configurations
-- Why optimization should be based on measurements
-- How GPU acceleration improves inference throughput
-- How FP16 affects inference speed and GPU memory
+. What LLM inference means
+. How to run an LLM locally
+. How to measure inference speed
+. What a performance baseline is
+. How CPU threads affect inference
+. How to benchmark different configurations
+. Why optimization should be based on measurements
 
 ### Next Steps
 
@@ -155,8 +166,6 @@ gpu-llm-inference/
 
 ### Status
 
-🟢 CPU baseline completed  
-🟢 CPU thread benchmarking completed  
-🟢 NVIDIA T4 GPU benchmark completed  
-🟢 FP16 optimization completed  
-🔵 CUDA optimization — next stage
+🟢 CPU baseline completed
+🟢 CPU thread benchmarking completed
+🔵 NVIDIA GPU/CUDA optimization — next stage
