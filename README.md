@@ -101,6 +101,23 @@ In this experiment, INT8 was significantly slower than FP16.
 
 This demonstrates that quantization does not automatically improve inference speed; the implementation and workload also affect performance.
 
+## GPU Profiling
+
+PyTorch Profiler was used to identify expensive GPU operations during FP16 inference on the Tesla T4.
+
+### Top GPU Operations
+
+| Operation | CUDA Time |
+|---|---:|
+| `aten::addmm` | 18.053 ms |
+| `aten::mm` | 13.293 ms |
+
+### Finding
+
+Matrix multiplication operations were a major part of the GPU workload.
+
+This profiling step helps identify where optimization effort should be focused instead of optimizing blindly.
+
 ## Results
 
 | Configuration | Tokens/second |
@@ -148,7 +165,11 @@ gpu-llm-inference/
 │   ├── first_profile.txt
 │   ├── thread_results.txt
 │   ├── gpu_t4_results.txt
-│   └── fp16_results.txt
+│   ├── fp16_results.txt
+│   ├── int8_results.txt
+│   ├── batch_results.txt
+│   └── gpu_profile.txt
+
 │
 ├── baseline.py
 ├── llm_profile.py
@@ -167,10 +188,10 @@ gpu-llm-inference/
 
 ### Next Steps
 
-- Measure GPU memory usage across configurations
-- Learn and apply CUDA optimization
-- Test quantization
-- Compare optimization techniques
+- Optimize GPU matrix operations
+- Explore CUDA optimization techniques
+- Measure optimization impact
+- Compare optimized vs baseline performance
 - Build a final performance report
 
 ### Project Philosophy
@@ -179,6 +200,12 @@ gpu-llm-inference/
 
 ### Status
 
-🟢 CPU baseline completed
-🟢 CPU thread benchmarking completed
-🔵 NVIDIA GPU/CUDA optimization — next stage
+🟢 CPU baseline completed  
+🟢 CPU thread benchmarking completed  
+🟢 NVIDIA T4 GPU benchmark completed  
+🟢 FP16 optimization completed  
+🟢 GPU memory analysis completed  
+🟢 Batch inference benchmarking completed  
+🟢 INT8 quantization experiment completed  
+🟢 GPU profiling completed  
+🔵 CUDA optimization — next stage
