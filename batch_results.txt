@@ -1,0 +1,28 @@
+Model: distilgpt2
+GPU: NVIDIA Tesla T4
+Precision: FP16
+
+Batch inference benchmark:
+
+Batch 1:
+Time: 0.2415 seconds
+Total tokens: 30
+Tokens/second: 124.23
+
+Batch 4:
+Time: 0.2662 seconds
+Total tokens: 120
+Tokens/second: 450.72
+
+Batch 8:
+Time: 0.2540 seconds
+Total tokens: 240
+Tokens/second: 944.90
+
+Result:
+Batch 8 achieved approximately 7.6x higher throughput
+than batch 1 in this experiment.
+
+Note:
+Higher batch size improves total throughput, but does not
+mean a single request becomes 7.6x faster.
