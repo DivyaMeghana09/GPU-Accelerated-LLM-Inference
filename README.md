@@ -130,13 +130,16 @@ gpu-llm-inference/
 ```
 
 ### What I Learned
-. What LLM inference means
-. How to run an LLM locally
-. How to measure inference speed
-. What a performance baseline is
-. How CPU threads affect inference
-. How to benchmark different configurations
-. Why optimization should be based on measurements
+
+- What LLM inference means
+- How to run an LLM locally
+- How to measure inference speed
+- What a performance baseline is
+- How CPU threads affect inference
+- How to benchmark different configurations
+- Why optimization should be based on measurements
+- How GPU acceleration improves inference throughput
+- How FP16 affects inference speed and GPU memory
 
 ### Next Steps
 
@@ -152,6 +155,8 @@ gpu-llm-inference/
 
 ### Status
 
-🟢 CPU baseline completed
-🟢 CPU thread benchmarking completed
-🔵 NVIDIA GPU/CUDA optimization — next stage
+🟢 CPU baseline completed  
+🟢 CPU thread benchmarking completed  
+🟢 NVIDIA T4 GPU benchmark completed  
+🟢 FP16 optimization completed  
+🔵 CUDA optimization — next stage
