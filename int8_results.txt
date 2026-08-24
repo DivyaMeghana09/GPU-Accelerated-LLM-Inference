@@ -1,0 +1,19 @@
+Model: distilgpt2
+GPU: NVIDIA Tesla T4
+
+INT8 Benchmark:
+Generated tokens: 30
+Average time: 4.1251 seconds
+Tokens/second: 7.27
+
+Comparison:
+FP16: 185.33 tokens/sec
+INT8: 7.27 tokens/sec
+
+Result:
+INT8 was significantly slower than FP16 in this experiment.
+
+Finding:
+Quantization does not automatically improve inference
+performance. The overhead of the INT8 implementation made
+this workload much slower.

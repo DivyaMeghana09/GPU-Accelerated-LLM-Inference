@@ -88,6 +88,19 @@ In this experiment, batch size 8 achieved approximately **7.6× higher throughpu
 
 This demonstrates how batching can improve GPU throughput for multiple inference requests.
 
+## INT8 Quantization Experiment
+
+INT8 quantization was tested to determine whether reducing numerical precision would improve inference performance.
+
+| Precision | Tokens/second |
+|---|---:|
+| FP16 | **185.33** |
+| INT8 | 7.27 |
+
+In this experiment, INT8 was significantly slower than FP16.
+
+This demonstrates that quantization does not automatically improve inference speed; the implementation and workload also affect performance.
+
 ## Results
 
 | Configuration | Tokens/second |
