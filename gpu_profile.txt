@@ -1,0 +1,18 @@
+Model: distilgpt2
+GPU: NVIDIA Tesla T4
+Precision: FP16
+
+GPU Profiling:
+
+Top GPU operations:
+aten::addmm: 18.053 ms
+aten::mm: 13.293 ms
+
+Major GPU work:
+Matrix multiplication / matrix operations
+
+Self CUDA time: 50.770 ms
+
+Finding:
+Matrix multiplication operations are a major part of
+the GPU workload during LLM inference.
