@@ -112,6 +112,21 @@ PyTorch Profiler was used to identify expensive GPU operations during FP16 infer
 | `aten::addmm` | 18.053 ms |
 | `aten::mm` | 13.293 ms |
 
+## torch.compile Experiment
+
+`torch.compile()` was tested to determine whether model compilation improved FP16 inference performance.
+
+| Configuration | Tokens/second |
+|---|---:|
+| FP16 baseline | **185.33** |
+| torch.compile | 184.26 |
+
+### Finding
+
+`torch.compile()` did not improve throughput for this specific model and workload.
+
+This experiment reinforced the importance of measuring optimizations instead of assuming they will always improve performance.
+
 ### Finding
 
 Matrix multiplication operations were a major part of the GPU workload.
@@ -169,6 +184,7 @@ gpu-llm-inference/
 │   ├── int8_results.txt
 │   ├── batch_results.txt
 │   └── gpu_profile.txt
+│   └── compile_results.txt
 
 │
 ├── baseline.py
@@ -178,13 +194,13 @@ gpu-llm-inference/
 ```
 
 ### What I Learned
-- What LLM inference means
-- How to run an LLM locally
-- How to measure inference speed
-- What a performance baseline is
-- How CPU threads affect inference
-- How to benchmark different configurations
-- Why optimization should be based on measurements
+. What LLM inference means
+. How to run an LLM locally
+. How to measure inference speed
+. What a performance baseline is
+. How CPU threads affect inference
+. How to benchmark different configurations
+. Why optimization should be based on measurements
 
 ### Next Steps
 

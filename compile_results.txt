@@ -1,0 +1,20 @@
+Model: distilgpt2
+GPU: NVIDIA Tesla T4
+Precision: FP16
+
+torch.compile Benchmark:
+
+FP16 baseline:
+Tokens/second: 185.33
+
+torch.compile:
+Average time: 0.1628 seconds
+Tokens/second: 184.26
+
+Result:
+torch.compile did not improve throughput in this experiment.
+
+Finding:
+Optimization techniques must be tested on the actual
+model and workload. An optimization that helps one workload
+may not help another.
