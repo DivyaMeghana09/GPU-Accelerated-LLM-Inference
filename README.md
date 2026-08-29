@@ -133,6 +133,20 @@ Matrix multiplication operations were a major part of the GPU workload.
 
 This profiling step helps identify where optimization effort should be focused instead of optimizing blindly.
 
+## Performance Charts
+
+### CPU vs GPU
+
+![CPU vs GPU](charts/cpu_vs_gpu.png)
+
+### FP32 vs FP16
+
+![FP32 vs FP16](charts/fp32_vs_fp16.png)
+
+### Batch Size vs Throughput
+
+![Batch Throughput](charts/batch_throughput.png)
+
 ## Results
 
 | Configuration | Tokens/second |
@@ -227,6 +241,10 @@ gpu-llm-inference/
 │   └── sequence_length_results.txt
 │   ├── batch_memory_results.txt
 │   └── final_report.txt
+├── charts/
+│   ├── cpu_vs_gpu.png
+│   ├── fp32_vs_fp16.png
+│   └── batch_throughput.png
 
 │
 ├── baseline.py
