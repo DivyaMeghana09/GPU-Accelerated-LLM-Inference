@@ -156,6 +156,29 @@ Average time: 0.1585 seconds
 Tokens/second: 189.22
 ```
 
+## Batch Inference Benchmark
+
+Batch inference was tested using FP16 on the NVIDIA Tesla T4.
+
+Each configuration used:
+
+- 3 warm-up runs
+- 5 timed runs
+
+| Batch Size | Tokens/second | Peak GPU Memory |
+|---:|---:|---:|
+| 1 | 98.73 | 169.06 MB |
+| 4 | 461.00 | 172.24 MB |
+| 8 | **725.59** | **176.48 MB** |
+
+### Finding
+
+Increasing batch size significantly improved total throughput.
+
+Batch size 8 achieved approximately **7.35× higher throughput** than batch size 1 in this experiment.
+
+GPU memory usage increased only modestly in the measured workload.
+
 ## Sequence Length Experiment
 
 Inference performance was tested using different input sequence lengths.

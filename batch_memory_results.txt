@@ -1,0 +1,21 @@
+Model: distilgpt2
+GPU: NVIDIA Tesla T4
+Precision: FP16
+
+Batch Size vs Peak GPU Memory
+
+Batch size: 1
+Peak GPU memory: 169.06 MB
+
+Batch size: 4
+Peak GPU memory: 172.24 MB
+
+Batch size: 8
+Peak GPU memory: 176.48 MB
+
+Finding:
+GPU memory usage increased gradually as batch size increased.
+
+Batching significantly improved throughput while requiring
+only a relatively small increase in measured peak GPU memory
+for this experiment.
