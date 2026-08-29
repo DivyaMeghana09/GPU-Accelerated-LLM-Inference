@@ -137,15 +137,15 @@ This profiling step helps identify where optimization effort should be focused i
 
 ### CPU vs GPU
 
-![CPU vs GPU](charts/cpu_vs_gpu.png)
+![CPU vs GPU](cpu_vs_gpu.png)
 
 ### FP32 vs FP16
 
-![FP32 vs FP16](charts/fp32_vs_fp16.png)
+![FP32 vs FP16](fp32_vs_fp16.png)
 
 ### Batch Size vs Throughput
 
-![Batch Throughput](charts/batch_throughput.png)
+![Batch Throughput](batch_throughput.png)
 
 ## Results
 
