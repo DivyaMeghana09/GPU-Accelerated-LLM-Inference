@@ -156,6 +156,22 @@ Average time: 0.1585 seconds
 Tokens/second: 189.22
 ```
 
+## Sequence Length Experiment
+
+Inference performance was tested using different input sequence lengths.
+
+| Prompt | Input Tokens | Avg Tokens/second |
+|---|---:|---:|
+| Short | 4 | **163.74** |
+| Medium | 72 | 125.11 |
+| Long | 282 | 138.83 |
+
+### Finding
+
+Inference throughput varied with input sequence length.
+
+Repeated experiments showed that benchmark results can vary between runs, demonstrating why performance measurements should use multiple runs and averages instead of relying on a single benchmark.
+
 ### Current Results
 ```bash
 CPU baseline:       37.83 tokens/sec
@@ -185,6 +201,7 @@ gpu-llm-inference/
 │   ├── batch_results.txt
 │   └── gpu_profile.txt
 │   └── compile_results.txt
+│   └── sequence_length_results.txt
 
 │
 ├── baseline.py

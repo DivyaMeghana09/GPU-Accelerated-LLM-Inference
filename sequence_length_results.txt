@@ -1,0 +1,31 @@
+Model: distilgpt2
+GPU: NVIDIA Tesla T4
+Precision: FP16
+Generated tokens per request: 30
+
+Sequence Length Experiment
+
+Final averages from 3 experiments:
+
+Short prompt:
+Input tokens: 4
+Tokens/second: 163.74
+
+Medium prompt:
+Input tokens: 72
+Tokens/second: 125.11
+
+Long prompt:
+Input tokens: 282
+Tokens/second: 138.83
+
+Finding:
+Inference throughput varied with input sequence length.
+
+The short prompt achieved the highest average generation
+throughput in this experiment.
+
+Method:
+Each configuration was tested across 3 experiments.
+Each experiment used warm-up runs and 5 timed benchmark runs.
+Prompt order was randomized between experiments.
