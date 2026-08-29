@@ -225,6 +225,8 @@ gpu-llm-inference/
 │   └── gpu_profile.txt
 │   └── compile_results.txt
 │   └── sequence_length_results.txt
+│   ├── batch_memory_results.txt
+│   └── final_report.txt
 
 │
 ├── baseline.py

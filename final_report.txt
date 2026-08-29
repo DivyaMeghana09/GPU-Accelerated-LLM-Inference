@@ -1,0 +1,139 @@
+GPU-Accelerated LLM Inference
+Final Performance Report
+
+Model: distilgpt2
+GPU: NVIDIA Tesla T4
+
+================================
+1. CPU PERFORMANCE
+================================
+
+CPU baseline:
+37.83 tokens/sec
+
+Best CPU thread result:
+42.88 tokens/sec
+Configuration: 2 CPU threads
+
+
+================================
+2. GPU PERFORMANCE
+================================
+
+NVIDIA Tesla T4:
+189.22 tokens/sec
+
+
+================================
+3. PRECISION COMPARISON
+================================
+
+FP32:
+175.67 tokens/sec
+
+FP16:
+185.33 tokens/sec
+
+Finding:
+FP16 provided slightly higher throughput
+and reduced GPU memory usage.
+
+
+================================
+4. BATCH INFERENCE
+================================
+
+Batch size 1:
+98.73 tokens/sec
+Peak memory: 169.06 MB
+
+Batch size 4:
+461.00 tokens/sec
+Peak memory: 172.24 MB
+
+Batch size 8:
+725.59 tokens/sec
+Peak memory: 176.48 MB
+
+Finding:
+Batching produced the largest throughput
+improvement in this experiment.
+
+
+================================
+5. INT8 QUANTIZATION
+================================
+
+INT8:
+7.27 tokens/sec
+
+Finding:
+INT8 was significantly slower for this
+model and hardware configuration.
+
+
+================================
+6. TORCH.COMPILE
+================================
+
+FP16 baseline:
+185.33 tokens/sec
+
+torch.compile:
+184.26 tokens/sec
+
+Finding:
+torch.compile did not improve performance
+for this workload.
+
+
+================================
+7. GPU PROFILING
+================================
+
+Major operations:
+
+aten::addmm:
+18.053 ms CUDA time
+
+aten::mm:
+13.293 ms CUDA time
+
+Finding:
+Matrix multiplication was a major part
+of the GPU workload.
+
+
+================================
+FINAL CONCLUSIONS
+================================
+
+1. GPU inference was significantly faster
+   than CPU inference.
+
+2. FP16 improved performance and reduced
+   GPU memory usage compared with FP32.
+
+3. Batching provided the largest throughput
+   improvement.
+
+4. INT8 quantization did not improve
+   performance in this experiment.
+
+5. torch.compile did not improve performance
+   for this specific workload.
+
+6. Repeated benchmarks were important because
+   single-run results showed noticeable variation.
+
+Project philosophy:
+
+Measure
+↓
+Find the bottleneck
+↓
+Optimize
+↓
+Measure again
+↓
+Keep what works
