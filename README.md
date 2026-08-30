@@ -293,8 +293,6 @@ gpu-llm-inference/
 - Compare optimization techniques across different hardware
 - Build more advanced CUDA-level optimizations
 
-### Status
-
 ## Status
 
 🟢 CPU baseline completed  
