@@ -295,15 +295,28 @@ gpu-llm-inference/
 
 ### Status
 
-- 🟢 CPU baseline completed
-- 🟢 CPU thread benchmarking completed
-- 🟢 NVIDIA T4 GPU benchmarking completed
-- 🟢 FP16 optimization experiment completed
-- 🟢 GPU memory analysis completed
-- 🟢 Batch inference benchmarking completed
-- 🟢 INT8 quantization experiment completed
-- 🟢 `torch.compile()` experiment completed
-- 🟢 Sequence-length experiment completed
-- 🟢 GPU profiling completed
-- 🟢 Final performance report completed
-- 🔵 CUDA-level optimization — next stage
+## Status
+
+🟢 CPU baseline completed  
+
+🟢 CPU thread benchmarking completed  
+
+🟢 NVIDIA T4 GPU benchmarking completed  
+
+🟢 FP16 optimization experiment completed  
+
+🟢 GPU memory analysis completed  
+
+🟢 Batch inference benchmarking completed  
+
+🟢 INT8 quantization experiment completed  
+
+🟢 `torch.compile()` experiment completed  
+
+🟢 Sequence-length experiment completed  
+
+🟢 GPU profiling completed  
+
+🟢 Final performance report completed  
+
+🔵 CUDA-level optimization — next stage
