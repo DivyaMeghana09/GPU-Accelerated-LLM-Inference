@@ -1,97 +1,124 @@
-GPU-Accelerated LLM Inference
-Final Performance Report
+========================================
+GPU-ACCELERATED LLM INFERENCE
+FINAL PERFORMANCE REPORT
+========================================
 
-Model: distilgpt2
+MODEL
+-----
+Model: DistilGPT2
+Parameters: 81,912,576
+
+HARDWARE
+--------
 GPU: NVIDIA Tesla T4
+CUDA Version: 12.8
 
-================================
-1. CPU PERFORMANCE
-================================
+========================================
+CPU BENCHMARK
+========================================
 
-CPU baseline:
+CPU Baseline:
 37.83 tokens/sec
 
-Best CPU thread result:
+Best CPU Configuration:
+2 threads
+
+Performance:
 42.88 tokens/sec
-Configuration: 2 CPU threads
 
-
-================================
-2. GPU PERFORMANCE
-================================
+========================================
+GPU BENCHMARK
+========================================
 
 NVIDIA Tesla T4:
 189.22 tokens/sec
 
+GPU Speedup vs Best CPU:
+Approximately 4.4x
 
-================================
-3. PRECISION COMPARISON
-================================
+========================================
+PRECISION EXPERIMENT
+========================================
 
 FP32:
 175.67 tokens/sec
+481.85 MB GPU memory
 
 FP16:
 185.33 tokens/sec
+329.24 MB GPU memory
 
 Finding:
-FP16 provided slightly higher throughput
-and reduced GPU memory usage.
+FP16 improved throughput and reduced
+measured GPU memory usage.
 
+========================================
+INT8 QUANTIZATION
+========================================
 
-================================
-4. BATCH INFERENCE
-================================
-
-Batch size 1:
-98.73 tokens/sec
-Peak memory: 169.06 MB
-
-Batch size 4:
-461.00 tokens/sec
-Peak memory: 172.24 MB
-
-Batch size 8:
-725.59 tokens/sec
-Peak memory: 176.48 MB
-
-Finding:
-Batching produced the largest throughput
-improvement in this experiment.
-
-
-================================
-5. INT8 QUANTIZATION
-================================
+FP16:
+185.33 tokens/sec
 
 INT8:
 7.27 tokens/sec
 
 Finding:
-INT8 was significantly slower for this
-model and hardware configuration.
+INT8 was slower in this configuration.
 
+========================================
+BATCH INFERENCE
+========================================
 
-================================
-6. TORCH.COMPILE
-================================
+Batch Size 1:
+98.73 tokens/sec
 
-FP16 baseline:
+Batch Size 4:
+461.00 tokens/sec
+
+Batch Size 8:
+725.59 tokens/sec
+
+Finding:
+Increasing batch size significantly
+improved total throughput.
+
+========================================
+SEQUENCE LENGTH EXPERIMENT
+========================================
+
+Short Prompt:
+163.74 tokens/sec
+
+Medium Prompt:
+125.11 tokens/sec
+
+Long Prompt:
+138.83 tokens/sec
+
+Finding:
+Performance varied across runs and
+input lengths, showing the importance
+of repeated measurements.
+
+========================================
+TORCH.COMPILE EXPERIMENT
+========================================
+
+FP16 Baseline:
 185.33 tokens/sec
 
 torch.compile:
 184.26 tokens/sec
 
 Finding:
-torch.compile did not improve performance
-for this workload.
+torch.compile did not improve
+performance for this workload.
 
+========================================
+GPU PROFILING
+========================================
 
-================================
-7. GPU PROFILING
-================================
-
-Major operations:
+Major GPU Operations:
 
 aten::addmm:
 18.053 ms CUDA time
@@ -100,40 +127,68 @@ aten::mm:
 13.293 ms CUDA time
 
 Finding:
-Matrix multiplication was a major part
-of the GPU workload.
+Matrix multiplication was a major
+part of the GPU workload.
 
+========================================
+CUSTOM CUDA KERNEL EXPERIMENT
+========================================
 
-================================
-FINAL CONCLUSIONS
-================================
+Operation:
+Vector Addition
 
-1. GPU inference was significantly faster
-   than CPU inference.
+Elements:
+10,000,000
 
-2. FP16 improved performance and reduced
-   GPU memory usage compared with FP32.
+Threads per Block:
+256
 
-3. Batching provided the largest throughput
-   improvement.
+Blocks:
+39,063
 
-4. INT8 quantization did not improve
-   performance in this experiment.
+CPU Time:
+0.05923 seconds
 
-5. torch.compile did not improve performance
-   for this specific workload.
+GPU Kernel Time:
+0.000766 seconds
 
-6. Repeated benchmarks were important because
-   single-run results showed noticeable variation.
+Measured Kernel Speedup:
+77.32x
 
-Project philosophy:
+Important Note:
+GPU timing measures kernel execution
+only and does not include CPU-to-GPU
+or GPU-to-CPU data transfer time.
+
+========================================
+FINAL CONCLUSION
+========================================
+
+The project demonstrated that GPU
+acceleration significantly improved
+LLM inference throughput compared
+with the tested CPU configuration.
+
+FP16 and batch inference provided
+useful performance improvements.
+
+INT8 quantization and torch.compile
+did not improve performance for this
+specific workload.
+
+GPU profiling showed that matrix
+multiplication was a major part of
+the workload.
+
+A custom CUDA kernel experiment was
+also implemented to understand GPU
+parallel execution using threads,
+blocks, and grids.
+
+The main lesson of the project was:
 
 Measure
-↓
-Find the bottleneck
-↓
-Optimize
-↓
-Measure again
-↓
-Keep what works
+→ Find the bottleneck
+→ Optimize
+→ Measure again
+→ Keep what works
