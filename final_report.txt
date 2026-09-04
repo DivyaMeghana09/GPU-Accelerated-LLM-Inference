@@ -1,137 +1,5 @@
 ========================================
-GPU-ACCELERATED LLM INFERENCE
-FINAL PERFORMANCE REPORT
-========================================
-
-MODEL
------
-Model: DistilGPT2
-Parameters: 81,912,576
-
-HARDWARE
---------
-GPU: NVIDIA Tesla T4
-CUDA Version: 12.8
-
-========================================
-CPU BENCHMARK
-========================================
-
-CPU Baseline:
-37.83 tokens/sec
-
-Best CPU Configuration:
-2 threads
-
-Performance:
-42.88 tokens/sec
-
-========================================
-GPU BENCHMARK
-========================================
-
-NVIDIA Tesla T4:
-189.22 tokens/sec
-
-GPU Speedup vs Best CPU:
-Approximately 4.4x
-
-========================================
-PRECISION EXPERIMENT
-========================================
-
-FP32:
-175.67 tokens/sec
-481.85 MB GPU memory
-
-FP16:
-185.33 tokens/sec
-329.24 MB GPU memory
-
-Finding:
-FP16 improved throughput and reduced
-measured GPU memory usage.
-
-========================================
-INT8 QUANTIZATION
-========================================
-
-FP16:
-185.33 tokens/sec
-
-INT8:
-7.27 tokens/sec
-
-Finding:
-INT8 was slower in this configuration.
-
-========================================
-BATCH INFERENCE
-========================================
-
-Batch Size 1:
-98.73 tokens/sec
-
-Batch Size 4:
-461.00 tokens/sec
-
-Batch Size 8:
-725.59 tokens/sec
-
-Finding:
-Increasing batch size significantly
-improved total throughput.
-
-========================================
-SEQUENCE LENGTH EXPERIMENT
-========================================
-
-Short Prompt:
-163.74 tokens/sec
-
-Medium Prompt:
-125.11 tokens/sec
-
-Long Prompt:
-138.83 tokens/sec
-
-Finding:
-Performance varied across runs and
-input lengths, showing the importance
-of repeated measurements.
-
-========================================
-TORCH.COMPILE EXPERIMENT
-========================================
-
-FP16 Baseline:
-185.33 tokens/sec
-
-torch.compile:
-184.26 tokens/sec
-
-Finding:
-torch.compile did not improve
-performance for this workload.
-
-========================================
-GPU PROFILING
-========================================
-
-Major GPU Operations:
-
-aten::addmm:
-18.053 ms CUDA time
-
-aten::mm:
-13.293 ms CUDA time
-
-Finding:
-Matrix multiplication was a major
-part of the GPU workload.
-
-========================================
-CUSTOM CUDA KERNEL EXPERIMENT
+CUDA BLOCK SIZE OPTIMIZATION
 ========================================
 
 Operation:
@@ -140,55 +8,34 @@ Vector Addition
 Elements:
 10,000,000
 
-Threads per Block:
-256
+Threads per Block Tested:
 
-Blocks:
-39,063
+128:
+0.00061117 seconds
 
-CPU Time:
-0.05923 seconds
+256:
+0.00058153 seconds
 
-GPU Kernel Time:
-0.000766 seconds
+512:
+0.00059874 seconds
 
-Measured Kernel Speedup:
-77.32x
+BEST CONFIGURATION
+----------------------------------------
 
-Important Note:
-GPU timing measures kernel execution
-only and does not include CPU-to-GPU
-or GPU-to-CPU data transfer time.
+256 Threads per Block
 
-========================================
-FINAL CONCLUSION
-========================================
+Average GPU Kernel Time:
+0.00058153 seconds
 
-The project demonstrated that GPU
-acceleration significantly improved
-LLM inference throughput compared
-with the tested CPU configuration.
+CONCLUSION
+----------------------------------------
 
-FP16 and batch inference provided
-useful performance improvements.
+For this vector-addition kernel and
+10-million-element workload on the
+NVIDIA Tesla T4, 256 threads per block
+produced the lowest average measured
+kernel execution time.
 
-INT8 quantization and torch.compile
-did not improve performance for this
-specific workload.
-
-GPU profiling showed that matrix
-multiplication was a major part of
-the workload.
-
-A custom CUDA kernel experiment was
-also implemented to understand GPU
-parallel execution using threads,
-blocks, and grids.
-
-The main lesson of the project was:
-
-Measure
-→ Find the bottleneck
-→ Optimize
-→ Measure again
-→ Keep what works
+The performance differences were small,
+so the result is specific to this kernel
+and workload.
