@@ -280,6 +280,7 @@ gpu-llm-inference/
 │   ├── sequence_length_results.txt
 │   ├── cuda_vector_results.txt
 │   └── final_report.txt
+|   └── cuda_block_size_results.txt
 │
 ├── charts/
 │   ├── cpu_vs_gpu.png
@@ -317,6 +318,31 @@ gpu-llm-inference/
 
 **Measure → Find the bottleneck → Optimize → Measure again → Keep what works**
 
+## CUDA Block Size Optimization Experiment
+
+To explore CUDA execution configuration, I tested different numbers of threads per block for the custom vector-addition kernel.
+
+### Results
+
+| Threads per Block | Blocks | Average GPU Kernel Time |
+|---:|---:|---:|
+| 128 | 78,125 | 0.00061117 sec |
+| **256** | **39,063** | **0.00058153 sec** |
+| 512 | 19,532 | 0.00059874 sec |
+
+### Finding
+
+For this vector-addition kernel and 10-million-element workload on the NVIDIA Tesla T4, **256 threads per block produced the lowest average measured kernel execution time**.
+
+The differences were small, so the result is specific to this kernel and workload.
+
+### What I Learned
+
+- CUDA performance can depend on execution configuration.
+- Threads are organized into blocks.
+- Different block sizes can affect GPU utilization and performance.
+- Benchmarking multiple configurations is necessary to find the best configuration for a specific workload.
+
 ## Next Steps
 - Explore CUDA optimization techniques
 - Investigate GPU matrix operation optimization
@@ -338,4 +364,5 @@ gpu-llm-inference/
 🟢 GPU profiling completed
 🟢 CUDA fundamentals completed  
 🟢 Custom CUDA kernel experiment completed
-🔵 Advanced CUDA optimization — next stage
+🟢 CUDA block-size optimization experiment completed  
+🔵 Final project validation and report — next stage
