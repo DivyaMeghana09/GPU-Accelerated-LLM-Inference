@@ -190,6 +190,31 @@ Inference performance was tested using different input sequence lengths.
 | Medium    |           72 |                125.11 |
 | Long      |          282 |                138.83 |
 
+## Custom CUDA Kernel Experiment
+
+To understand GPU computation at a lower level, I implemented a custom CUDA vector-addition kernel using Numba.
+
+### CUDA Execution Model
+
+```text
+Grid
+ └── Blocks
+      └── Threads
+           └── Each thread processes one element
+```
+
+### Benchmark Results
+
+| Configuration      |             Time |
+| ------------------ | ---------------: |
+| CPU NumPy          |      0.05923 sec |
+| Custom CUDA kernel | **0.000766 sec** |
+
+**Measured kernel speedup: approximately 77.32×**
+
+### Important Note
+The GPU result measures kernel execution time only. It does not include CPU-to-GPU or GPU-to-CPU memory transfer time.
+
 ### Finding
 
 Inference throughput varied with input sequence length.
@@ -253,6 +278,7 @@ gpu-llm-inference/
 │   ├── gpu_profile.txt
 │   ├── compile_results.txt
 │   ├── sequence_length_results.txt
+│   ├── cuda_vector_results.txt
 │   └── final_report.txt
 │
 ├── charts/
@@ -263,8 +289,8 @@ gpu-llm-inference/
 ├── baseline.py
 ├── llm_profile.py
 ├── thread_benchmark.py
-├── README.md
-└── .gitignore
+├── cuda_vector_add.py
+└── README.md
 ```
 
 ### What I Learned
@@ -281,6 +307,11 @@ gpu-llm-inference/
 - Why some optimizations do not improve every workload
 - How GPU profiling helps identify expensive operations
 - Why optimization should be based on measurements
+- How CUDA kernels execute on GPUs
+- How threads, blocks, and grids organize parallel work
+- How to launch a custom CUDA kernel using Numba
+- Why GPU synchronization is necessary for accurate timing
+- Why data-transfer overhead must be considered in real applications
 
 ### Project Philosophy
 
@@ -293,28 +324,18 @@ gpu-llm-inference/
 - Compare optimization techniques across different hardware
 - Build more advanced CUDA-level optimizations
 
-## Status
+### Status
 
-🟢 CPU baseline completed  
-
-🟢 CPU thread benchmarking completed  
-
-🟢 NVIDIA T4 GPU benchmarking completed  
-
-🟢 FP16 optimization experiment completed  
-
-🟢 GPU memory analysis completed  
-
-🟢 Batch inference benchmarking completed  
-
-🟢 INT8 quantization experiment completed  
-
-🟢 `torch.compile()` experiment completed  
-
-🟢 Sequence-length experiment completed  
-
-🟢 GPU profiling completed  
-
-🟢 Final performance report completed  
-
-🔵 CUDA-level optimization — next stage
+🟢 CPU baseline completed
+🟢 CPU thread benchmarking completed
+🟢 NVIDIA T4 GPU benchmarking completed
+🟢 FP16 optimization experiment completed
+🟢 GPU memory analysis completed
+🟢 Batch inference benchmarking completed
+🟢 INT8 quantization experiment completed
+🟢 `torch.compile()` experiment completed
+🟢 Sequence-length experiment completed
+🟢 GPU profiling completed
+🟢 CUDA fundamentals completed  
+🟢 Custom CUDA kernel experiment completed
+🔵 Advanced CUDA optimization — next stage

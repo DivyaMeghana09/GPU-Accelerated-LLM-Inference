@@ -1,0 +1,14 @@
+=== CUDA Vector Addition Benchmark ===
+
+GPU: NVIDIA Tesla T4
+Elements: 10,000,000
+Threads per block: 256
+Blocks: 39,063
+
+CPU time: 0.05923 seconds
+GPU kernel time: 0.000766 seconds
+Measured kernel speedup: 77.32x
+
+Note:
+The GPU timing measures kernel execution only and does not
+include CPU-to-GPU or GPU-to-CPU data transfer time.
