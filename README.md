@@ -343,26 +343,26 @@ The differences were small, so the result is specific to this kernel and workloa
 - Different block sizes can affect GPU utilization and performance.
 - Benchmarking multiple configurations is necessary to find the best configuration for a specific workload.
 
-## Next Steps
-- Explore CUDA optimization techniques
-- Investigate GPU matrix operation optimization
-- Test additional models and workloads
-- Compare optimization techniques across different hardware
-- Build more advanced CUDA-level optimizations
+### Next Steps
+
+- Explore more advanced CUDA kernel optimization
+- Test larger LLM models and workloads
+- Explore optimized inference frameworks
+- Compare results across different GPUs
 
 ### Status
 
-🟢 CPU baseline completed
-🟢 CPU thread benchmarking completed
-🟢 NVIDIA T4 GPU benchmarking completed
-🟢 FP16 optimization experiment completed
-🟢 GPU memory analysis completed
-🟢 Batch inference benchmarking completed
-🟢 INT8 quantization experiment completed
-🟢 `torch.compile()` experiment completed
-🟢 Sequence-length experiment completed
-🟢 GPU profiling completed
+🟢 CPU baseline completed  
+🟢 CPU thread benchmarking completed  
+🟢 NVIDIA T4 GPU benchmark completed  
+🟢 FP16 optimization completed  
+🟢 INT8 quantization experiment completed  
+🟢 GPU memory analysis completed  
+🟢 Batch inference benchmarking completed  
+🟢 Sequence length experiment completed  
+🟢 GPU profiling completed  
+🟢 torch.compile experiment completed  
 🟢 CUDA fundamentals completed  
-🟢 Custom CUDA kernel experiment completed
+🟢 Custom CUDA kernel experiment completed  
 🟢 CUDA block-size optimization experiment completed  
-🔵 Final project validation and report — next stage
+🔵 Final project validation and documentation — in progress
